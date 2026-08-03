@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 import requests
 
 
 @login_required
+@permission_required('dashboard.index_viewer', raise_exception=True)
 def index(request):
 
     response = requests.get(settings.API_URL)  # URL de la API
