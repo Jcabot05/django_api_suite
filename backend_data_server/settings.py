@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +25,13 @@ SECRET_KEY = 'django-insecure-&%6avxtfkm25rdb_+q9rmga9l_%vkl6=_b@@pyo73z_x%4se4g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.app.github.dev',
+    'https://localhost:8000',
+    'http://127.0.0.1:8000',
+]
 
 
 # Application definition
@@ -104,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
@@ -127,3 +131,10 @@ STATICFILES_DIRS = [
 ]
 
 API_URL = 'https://jsonplaceholder.typicode.com/posts'
+
+# Fallo: acceso sin autenticación
+LOGIN_URL = '/login/'
+
+# Éxito: luego de autenticación exitosa
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
